@@ -10,21 +10,24 @@ if [ ! -d "$ZINIT_HOME" ]; then
     git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
-# Install Nerd Font for Powerlevel10k
+# Install Nerd Font (useful for Starship symbols)
 echo "Installing Nerd Font..."
+brew install --cask font-cousine-nerd-font
+
+# Install Starship
+echo "Installing Starship..."
 if command -v brew &> /dev/null; then
-    brew install --cask font-meslo-lg-nerd-font
+    brew install starship
 else
-    # Create fonts directory if it doesn't exist
-    mkdir -p ~/.local/share/fonts
-
-    # Download and install Meslo Nerd Font
-    echo "Downloading Meslo Nerd Font..."
-    curl -fLo ~/.local/share/fonts/MesloLGS%20NF%20Regular.ttf \
-        https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
-
-    # Refresh font cache
-    if command -v fc-cache &> /dev/null; then
-        fc-cache -f -v
-    fi
+    curl -sS https://starship.rs/install.sh | sh
 fi
+
+# Create default Starship config if it doesn't exist
+if [ ! -f ~/.config/starship.toml ]; then
+    mkdir -p ~/.config
+    echo "# Get started with a basic starship.toml
+format = \"\$all\"
+" > ~/.config/starship.toml
+fi
+
+echo "Setup complete! Please restart your terminal and ensure your terminal uses the JetBrains Mono Nerd Font."
