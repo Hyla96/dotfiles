@@ -19,4 +19,6 @@ vim.keymap.set(
 vim.keymap.set("n", "<C-h>", "<C-w><", { desc = "Decrease window width" })
 vim.keymap.set("n", "<C-j>", "<C-w>-", { desc = "Decrease window height" })
 vim.keymap.set("n", "<C-k>", "<C-w>+", { desc = "Increase window height" })
-vim.keymap.set("n", "<C-l>", "<C-w>>", { desc = "Increase window width" })
+
+vim.keymap.set("v", "<leader>O", ":sort!<CR>", { desc = "Sort lines desc" })
+vim.keymap.set("v", "<leader>o", ":sort<CR>", { desc = "Sort lines asc" })
