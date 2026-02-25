@@ -6,8 +6,8 @@ echo "Starting ZSH environment setup..."
 echo "Installing Zinit..."
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 if [ ! -d "$ZINIT_HOME" ]; then
-    mkdir -p "$(dirname $ZINIT_HOME)"
-    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+  mkdir -p "$(dirname $ZINIT_HOME)"
+  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
 # Install Nerd Font (useful for Starship symbols)
@@ -16,18 +16,24 @@ brew install --cask font-cousine-nerd-font
 
 # Install Starship
 echo "Installing Starship..."
-if command -v brew &> /dev/null; then
-    brew install starship
+if command -v brew &>/dev/null; then
+  brew install starship
 else
-    curl -sS https://starship.rs/install.sh | sh
+  curl -sS https://starship.rs/install.sh | sh
 fi
 
 # Create default Starship config if it doesn't exist
 if [ ! -f ~/.config/starship.toml ]; then
-    mkdir -p ~/.config
-    echo "# Get started with a basic starship.toml
+  mkdir -p ~/.config
+  echo "# Get started with a basic starship.toml
 format = \"\$all\"
-" > ~/.config/starship.toml
+" >~/.config/starship.toml
 fi
 
+brew install claude-code
+claude mcp add --transport sse context7 https://mcp.context7.com/sse
+claude mcp add sequential-thinking -s local -- npx -y @modelcontextprotocol/server-sequential-thinking
+claude mcp add serena -- uvx --from git+https://github.com/oraios/serena serena start-mcp-server --context ide-assistant --project $(pwd)
+
 echo "Setup complete! Please restart your terminal and ensure your terminal uses the JetBrains Mono Nerd Font."
+
