@@ -8,21 +8,14 @@ install: deps zsh tmux nvim
 # Install all dependencies (zinit, starship, nerd font, claude-code, MCP servers)
 deps:
     @echo "Installing dependencies..."
-    # Zinit
-    #!/usr/bin/env zsh
-    ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-    if [ ! -d "$ZINIT_HOME" ]; then
-        mkdir -p "$(dirname $ZINIT_HOME)"
-        git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-    fi
-    # Starship + Nerd Font
+    ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"; \
+    [ ! -d "$$ZINIT_HOME" ] && mkdir -p "$$(dirname $$ZINIT_HOME)" && git clone https://github.com/zdharma-continuum/zinit.git "$$ZINIT_HOME" || true
     brew install starship
     brew install --cask font-cousine-nerd-font
-    # Claude Code + MCP servers
     brew install claude-code
     claude mcp add --transport sse context7 https://mcp.context7.com/sse
     claude mcp add sequential-thinking -s local -- npx -y @modelcontextprotocol/server-sequential-thinking
-    claude mcp add serena -- uvx --from git+https://github.com/oraios/serena serena start-mcp-server --context ide-assistant --project $(pwd)
+    claude mcp add serena -- uvx --from git+https://github.com/oraios/serena serena start-mcp-server --context ide-assistant --project {{DOTFILES}}
 
 # Copy zsh config to ~/
 zsh:
