@@ -8,14 +8,18 @@ Personal dotfiles repository for macOS. Manages zsh, tmux, Neovim, and Starship 
 
 ## Deployment Commands
 
+Uses [just](https://github.com/casey/just) (`brew install just`).
+
 ```sh
-make setup        # Run full setup (installs zinit, starship, nerd font, claude-code, MCP servers)
-make copy-zsh     # Copy .zsh/ to ~/
-make copy-tmux    # Copy .tmux.conf to ~/
-make copy-vi      # Copy .config/nvim/ to ~/.config/nvim/
+just install   # Full install: deps + zsh + tmux + nvim
+just deps      # Install zinit, starship, nerd font, claude-code, MCP servers
+just zsh       # Copy .zsh/ to ~/ and source from ~/.zshrc
+just tmux      # Copy .tmux.conf to ~/
+just nvim      # Copy .config/nvim/ to ~/.config/nvim/
+just starship  # Copy .config/starship.toml to ~/.config/
 ```
 
-`setup-zsh.sh` installs zinit (zsh plugin manager), Starship, Cousine Nerd Font via Homebrew, and configures claude-code MCP servers (context7, sequential-thinking, serena).
+After `just nvim`, open neovim and run `:Codeium Auth` to authenticate Windsurf.
 
 ## Architecture
 
@@ -31,7 +35,7 @@ Built on [LazyVim](https://www.lazyvim.org/) with lazy.nvim as the plugin manage
 
 - `lua/config/lazy.lua` — root config: sets up lazy.nvim, imports LazyVim base + `lua/plugins/`, configures conform.nvim (format-on-save) and nvim-lint.
 - `lua/config/` — options, keymaps, autocmds, colors.
-- `lua/plugins/` — per-plugin override files: LSP (`lsponfig.lua`), DAP, Telescope, file-browser, flutter, python, mini, ui, catppuccin, lazygit.
+- `lua/plugins/` — per-plugin override files: LSP (`lsponfig.lua`), DAP, Telescope, file-browser, flutter, python, mini, ui, catppuccin, lazygit, windsurf (AI completions).
 
 Colorscheme: catppuccin. Format-on-save via conform; per-ft formatters: stylua (lua), prettier (ts/js), ruff (python), rustfmt (rust), dart format (dart).
 
