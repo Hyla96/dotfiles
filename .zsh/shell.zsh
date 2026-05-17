@@ -1,4 +1,4 @@
-if [ "$TMUX" = "" ]; then tmux; fi
+export TMPDIR=/tmp
 
 # Zinit, package manager for zsh
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -29,3 +29,4 @@ eval "$(starship init zsh)"
 alias vim="nvim"
 alias vi="nvim"
 alias oldvim="vim"
+

@@ -19,7 +19,7 @@ just nvim      # Copy .config/nvim/ to ~/.config/nvim/
 just starship  # Copy .config/starship.toml to ~/.config/
 ```
 
-After `just nvim`, open neovim and run `:MasonInstall basedpyright`, then `:Codeium Auth` to authenticate Windsurf.
+After `just nvim`, open neovim and run `:MasonInstall basedpyright`.
 
 ## Architecture
 
@@ -35,7 +35,7 @@ Built on [LazyVim](https://www.lazyvim.org/) with lazy.nvim as the plugin manage
 
 - `lua/config/lazy.lua` — root config: sets up lazy.nvim, imports LazyVim base + `lua/plugins/`, configures conform.nvim (format-on-save) and nvim-lint.
 - `lua/config/` — options, keymaps, autocmds, colors.
-- `lua/plugins/` — per-plugin override files: LSP (`lsponfig.lua`), DAP, Telescope, file-browser, flutter, python, mini, ui, catppuccin, lazygit, windsurf (AI completions).
+- `lua/plugins/` — per-plugin override files: LSP (`lsponfig.lua`), DAP, Telescope, file-browser, flutter, python, mini, ui, catppuccin, lazygit.
 
 Colorscheme: catppuccin. Format-on-save via conform; per-ft formatters: stylua (lua), prettier (ts/js), ruff (python), rustfmt (rust), dart format (dart).
 
@@ -43,17 +43,8 @@ Colorscheme: catppuccin. Format-on-save via conform; per-ft formatters: stylua (
 - Python: `basedpyright` + `ruff`. `pyright` is explicitly disabled. `basedpyright` auto-detects virtualenvs by walking up from cwd for `pyvenv.cfg`.
 - LazyVim default `pyright` must stay disabled (`pyright = false` in `lsponfig.lua`) or it will shadow basedpyright.
 
-#### Windsurf (AI completions)
-First-time setup: `:Codeium Auth`
-
-| Key | Action |
-|-----|--------|
-| `<Tab>` | Accept suggestion |
-| `<M-]>` | Next suggestion |
-| `<M-[>` | Previous suggestion |
-| `<C-]>` | Dismiss |
-
-Commands: `:Codeium Toggle`, `:Codeium Chat`
+#### Copilot (AI completions)
+Managed via LazyVim extra `lazyvim.plugins.extras.ai.copilot`. Toggle with `<leader>ct`.
 
 ### Other configs
 - `.tmux.conf` — tmux config.

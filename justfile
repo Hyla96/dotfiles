@@ -36,7 +36,7 @@ nvim:
     @echo "Installing neovim config..."
     mkdir -p ~/.config
     cp -r {{DOTFILES}}/.config/nvim/ ~/.config/nvim/
-    @echo "Open nvim and run :Codeium Auth to authenticate Windsurf."
+    @echo "Neovim config installed."
 
 # Copy starship config to ~/.config/
 starship:
